@@ -22,4 +22,9 @@ class Validator {
   public addValidateInfo(str: string) {
     this.match += str;
   };
+
+  public setLength(min: number, max: number){
+    this.minLength = min;
+    this.maxLength = max;
+  };
 }
