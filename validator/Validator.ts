@@ -1,9 +1,9 @@
-class Validator {
+export class Validator {
   private match: string;
   private maxLength: number;
   private minLength: number;
-  constructor() {
-    this.reset();
+  constructor(...match: string[]) {
+    this.reset(...match);
   };
 
   public validate(str: string) {
@@ -11,19 +11,18 @@ class Validator {
       return false;
     if (str.length < this.minLength)
       return false;
-
-    return RegExp(`^${this.match}$`).test(str);
+    return new RegExp(`${this.match}`).test(str);
   };
 
-  public reset() {
-    this.match = "";
+  public reset(...match: string[]) {
+    this.match = match[0].toString() || "";
   };
 
   public addValidateInfo(str: string) {
     this.match += str;
   };
 
-  public setLength(min: number, max: number){
+  public setLength(min: number, max: number) {
     this.minLength = min;
     this.maxLength = max;
   };

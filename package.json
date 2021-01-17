@@ -1,0 +1,11 @@
+{
+  "name": "Validator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/huuphuoc1xx/Validator.git",
+  "author": "phuocnh3 <phuocnh@alive.vn>",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.1.3"
+  }
+}

@@ -1,4 +1,6 @@
-class ValidatorBuilder {
+import { Validator } from "./Validator";
+
+export class ValidatorBuilder {
     private validator: Validator;
     constructor() {
         this.reset();
