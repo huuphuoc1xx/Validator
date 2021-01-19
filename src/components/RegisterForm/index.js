@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Button, Card, Form} from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { Button, Card, Form } from "react-bootstrap";
+import { DefaultValidator, LengthValidator, ValidatorType } from "../../validator"
 
 export default function RegisterForm() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [data, setData] = useState({});
+  const Validate = () => {
+
+  };
   return (
     <>
       <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
@@ -12,7 +14,7 @@ export default function RegisterForm() {
           <Card className="card card-4">
             <Card.Body className="card-body">
               <Card.Title className="title">Đăng ký</Card.Title>
-              <Form method="POST">
+              <Form>
                 <div className="row row-space">
                   <div className="col-2">
                     <Form.Group className="input-group">
@@ -20,8 +22,10 @@ export default function RegisterForm() {
                       <Form.Control
                         type="text"
                         className="input--style-4"
-                        placeholder="Nhập họ tên"
+                        value={data.name}
+                        onChange={e => setData({ ...data, name: e.target.value })}
                       />
+                      <p>{new LengthValidator("Invalid length, must be 7-9 character", 7, 9).validate(data.name || "")}</p>
                     </Form.Group>
                   </div>
                   <div className="col-2">
@@ -31,7 +35,10 @@ export default function RegisterForm() {
                         type="email"
                         className="input--style-4"
                         placeholder="Nhập Email"
+                        value={data.email}
+                        onChange={e => setData({ ...data, email: e.target.value })}
                       />
+                      <p>{DefaultValidator.getInstance(ValidatorType.EMAIL).validate(data.email || "")}</p>
                     </Form.Group>
                   </div>
                 </div>
@@ -40,29 +47,23 @@ export default function RegisterForm() {
                     <Form.Group className="input-group">
                       <Form.Label className="label">Birthday</Form.Label>
                       <div className="input-group-icon">
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
+                        <Form.Control
+                          value={data.date}
+                          onChange={(e) => setData({ ...data, date: e.target.value })}
                         />
-                        <i className="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                       </div>
+                      <p>{DefaultValidator.getInstance(ValidatorType.DATE).validate(data.date || "")}</p>
                     </Form.Group>
                   </div>
                   <div className="col-2">
                     <Form.Group className="input-group">
                       <Form.Label className="label">Phone Number</Form.Label>
-                      <Form.Control className="input--style-4" type="phone" name="phone" placeholder="Nhập vào số điện thoại" />
+                      <div className="input-group-icon">
+                      <Form.Control type="text" value={data.phone} onChange={e => setData({ ...data, phone: e.target.value })} />
+                      </div>
+                    <p>{DefaultValidator.getInstance(ValidatorType.PHONE).validate(data.phone || "")}</p>
                     </Form.Group>
                   </div>
-                </div>
-                <div className="p-t-15">
-                  <Button
-                    variant="primary"
-                    className="btn btn--radius-2 btn--blue"
-                    type="submit"
-                  >
-                    Đăng ký
-                  </Button>
                 </div>
               </Form>
             </Card.Body>
