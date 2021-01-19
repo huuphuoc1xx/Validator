@@ -28,7 +28,7 @@ export class DefaultValidator {
         return this.floatValidator;
       case ValidatorType.PHONE:
         if (this.floatValidator === null) {
-          this.floatValidator = new ValidatorComponent("(0|\\+84)[1-9][0-9]{9,10}", "Invalid Phonenumber");
+          this.floatValidator = new ValidatorComponent("[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*", "Invalid Phonenumber");
           };
         return this.floatValidator;
       default:
